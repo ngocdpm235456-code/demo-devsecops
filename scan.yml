@@ -1,0 +1,16 @@
+name: DevSecOps-Automated-Scan
+
+on: [push, pull_request]
+
+jobs:
+  security-scan:
+    name: Automated Vulnerability Assessment
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    - name: Run Semgrep (SAST Scan)
+      run: |
+        python3 -m pip install semgrep
+        semgrep scan --config=auto --error
